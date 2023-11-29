@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Image Uploader</title>
+    <style>
+        *
+        {
+            font-family: sans-serif;
+            letter-spacing: 2px;
+            background-color: #141e38;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        .con
+        {
+            background-color: white;
+        }
+        input[type=file] {
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 300px;
+            max-height: 300px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            /* padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer; */
+
+            width: 190px;
+            height: 50px;
+            border: none;
+            color: white;
+            background-color: rgb(255,0,68);
+            border-radius: 4px;
+            box-shadow: inset 0 0 0 0 #f9e506;
+            transition: ease-out  0.3s;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        button:hover {
+            /* background-color: #45a049; */
+            box-shadow: inset 300px 0 0 0 #f9e506;
+            cursor: pointer;
+            color:#000;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+    <script>
+        function previewImage() {
+            var preview = document.querySelector('img');
+            var file = document.querySelector('input[type=file]').files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                preview.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+        }
+    </script>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- <div>
+            <input type="file" accept="image/*" onchange="previewImage()">
+            <img src="" alt="Uploaded Image" style="max-width: 100%; max-height: 100%;">
+        </div>
+        <div>
+            <button onclick="sendImage()">Process Image</button>
+            <div id="result"> result</div>
+        </div> -->
+        <form action="/process" method="post" enctype="multipart/form-data">
+            <div class="con">
+                <input class='con' type="file" name="file1" accept="image/*" onchange="previewImage()">
+                <img class="con" src="" alt="Uploaded Image" style="max-width: 100%; max-height: 100%;">
+            </div>
+            <div class="con">
+                <button type="submit">Process Image</button>
+            </div>
+        </form>
+            <div id="result" class="con">{{result}}</div>
+    </div>
+</body>
+</html>
