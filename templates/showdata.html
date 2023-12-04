@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>User Data</title>
+    <style media="screen">
+      *,
+      *:before,
+      *:after {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #080710;
+      }
+      .background {
+        width: 430px;
+        height: 520px;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+      }
+      .background .shape {
+        height: 200px;
+        width: 200px;
+        position: absolute;
+        border-radius: 50%;
+      }
+      .shape:first-child {
+        background: linear-gradient(#1845ad, #23a2f6);
+        left: -100px;
+        top: -120px;
+      }
+      .shape:last-child {
+        background: linear-gradient(to right, #ff512f, #f09819);
+        right: -95px;
+        bottom: -120px;
+      }
+      form {
+        height: 700px;
+        width: 450px;
+        background-color: rgba(255, 255, 255, 0.13);
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+        padding: 50px 35px;
+      }
+      form * {
+        font-family: "Verdana";
+        color: #000;
+        letter-spacing: 0.5px;
+        /* line-height:100%; */
+        outline: none;
+        border: none;
+      }
+
+      form h3 {
+        font-family: "Georgia";
+        color: #fff;
+        display: flex;
+        font-size: 32px;
+        font-weight: 32px;
+        line-height: 42px;
+        text-align: center;
+      }
+
+      label {
+        font-family: "Poiret One";
+        color: #fff;
+        display: block;
+        margin-top: 30px;
+        font-size: 20px;
+        font-weight: 500;
+      }
+      /* 
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px auto;
+            margin-right:0;
+            background-color:white;
+            display:inline-table;
+             display:block;
+        }
+        th, td {
+            display:;
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 10px;
+        }
+        th 
+        {
+
+            background-color: #f2f2f2;
+        }
+        tbody
+        {
+            height: 210px;
+            display:inline-table;
+            width:100%;
+            overflow:auto;
+        }  */
+      .container {
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow: auto;
+        max-height: 300px; /* Adjust the maximum height as needed */
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        text-align: left;
+        padding: 8px;
+        background-color: #f2f2f2;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      input {
+        font-family: "Poiret One";
+        display: flex;
+        justify-content: space-evenly;
+        align-content: center;
+        margin-top: 38px;
+        margin-left: 65px;
+        width: 235px;
+        background-color: #ffffff;
+        color: #080710;
+        padding: 10px;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+        height: 40px;
+      }
+      input:hover {
+        background-color: #55b0ec;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background">
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+    <form>
+      {% if user_data %}
+      <h3>Your data is safe and integrated!</h3>
+      <label>User Data for {{ logged_in_user }}</label>
+      <div class="container">
+        <table>
+          <thead>
+            <tr>
+              <th><pre>        Medicine</pre></th>
+              <th><pre>       Date</pre></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for entry in user_data %}
+            <tr>
+              <td>{{ entry.medicine }}</td>
+              <td>{{ entry.date }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p>No data available for the logged-in user.</p>
+      {% endif %}
+      <!-- {% if user_data %}
+        <h3>Your data is safe and integrated!</h3>
+        
+        <label>User Data for {{ logged_in_user }}</label>
+        <table>
+            <thead>
+                <tr>
+                    <th>Medicine</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in user_data %}
+                    <tr>
+                        <td>{{ entry.medicine }}</td>
+                        <td>{{ entry.date }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No data available for the logged-in user.</p>
+    {% endif %} -->
+      <input formaction="/logout" method="POST" type="submit" value="Log out" />
+
+      <input
+        formaction="/home"
+        method="POST"
+        type="submit"
+        value="Back to home"
+      />
+    </form>
+  </body>
+</html>
