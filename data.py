@@ -5,7 +5,7 @@ class DataBase:
     # constructor of DataBase class
     def __init__(self):
         # setting up the connection
-        self.conn = mysql.connector.connect(host='localhost',password='admin',user='root')
+        self.conn = mysql.connector.connect(host='localhost',password='',user='root')
         if self.conn.is_connected():
             print("Connection is established...!")
         else:
